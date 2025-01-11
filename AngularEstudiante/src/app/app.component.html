@@ -1,1 +1,71 @@
-<button class="btn btn-primary">¡Hola Bootstrap!</button>
+<div class="container">
+  
+  <div class="row pt-3">
+    <div class="col-6">
+      <h4>Student Portal</h4>
+    </div>
+    <div class="col-6 text-end">
+      <button class="btn btn-outline-success" (click)="openModel()" >Add New</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      
+      <div class="card">
+
+        <div class="card-header">
+          <div class="row">
+            <div class="col-6">
+              Student Name
+            </div>
+            <div class="col-6 text-end">
+              mobile No
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body">
+          
+          <p>City , state , pincode</p>
+          <p>Address</p>
+        </div>
+        
+        <div class="card-footer text-center">
+          <p>Email</p>
+        </div>
+        
+      </div>
+      
+      </div>
+    </div>
+  </div>
+
+
+<!-- Add Modal  -->
+
+<div class="modal" id="myModal" #myModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Create New Student</h4>
+        <button type="button" class="btn-close" (click)="closeModel()"></button>
+      </div>
+
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closeModel()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
