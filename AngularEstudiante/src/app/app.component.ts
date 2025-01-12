@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
   openModel(){
     // Esta linea setea nuevamente el modelo cuando se apertura el model, asi no quedan datos cacheados anteriormente.
-    this.studentObj = new Student();
+//    this.studentObj = new Student();
     
     const model = document.getElementById("myModal");
 
@@ -46,21 +46,58 @@ export class AppComponent implements OnInit {
   }
 
   closeModel(){
-
+this.studentObj = new Student();
     if(this.model != null){
       this.model.nativeElement.style.display = 'none';
     }
 
   }
 
+  onDelete(item: Student){
+    const isDelete = confirm("Are you sure want to Delete");
+
+    if(isDelete){
+      const currentRecord = this.studentList.findIndex(m => m.id === this.studentObj.id);
+
+      this.studentList.splice(currentRecord, 1);
+      localStorage.setItem('angular17crud', JSON.stringify(this.studentList));
+
+    }
+
+  }
+
+  onEdit(item: Student){
+    this.studentObj = item;
+    this.openModel();
+  }
+
+  updateStudent(){
+    const currentRecord = this.studentList.find(m => m.id === this.studentObj.id);
+
+    if(currentRecord != undefined){
+      currentRecord.name      = this.studentObj.name;
+      currentRecord.address   = this.studentObj.address;
+      currentRecord.mobileNo  = this.studentObj.mobileNo;
+    };
+
+    localStorage.setItem('angular17crud', JSON.stringify(this.studentList));
+
+    this.closeModel();
+  }
+
   saveStudent(){
-    debugger;
+    //debugger;
     
     const isLocalPresent = localStorage.getItem("angular17crud");
 
     if(isLocalPresent != null){
 
       const oldArray = JSON.parse(isLocalPresent);
+
+      //  Aqui cuando hacemos el edit
+      this.studentObj.id = oldArray.length + 1;
+      // End Edit
+
       oldArray.push(this.studentObj);
       // enviamos data al arraycard principal, actualizado.
       this.studentList = oldArray;
@@ -70,6 +107,11 @@ export class AppComponent implements OnInit {
 
       const newArr = [];
       newArr.push(this.studentObj);
+
+      //  Aqui cuando hacemos el edit
+      this.studentObj.id = 1;
+      // End Edit
+
       this.studentList = newArr;
       localStorage.setItem('angular17crud', JSON.stringify(newArr));
 
@@ -84,6 +126,7 @@ export class AppComponent implements OnInit {
 
 //  Creatin Classes
 export class Student{
+  id: number;
   name: string;
   mobileNo: string;
   email: string;
@@ -93,6 +136,7 @@ export class Student{
   address: string;
 
   constructor(){
+    this.id = 0;
     this.address = '';
     this.city = '';
     this.email = '';
