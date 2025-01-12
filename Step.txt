@@ -1,0 +1,16 @@
+Inicio al FE de Estudiantes
+
+Branch2:
+Daremos inicio al desarrollo de los container
+
+Student
+	name
+	contactNo
+	email
+	city
+	state
+	address
+	picode
+
+min20
+min26
